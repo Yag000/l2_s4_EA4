@@ -19,11 +19,9 @@ def exponentiation_binaire_iter(m, n):
     return res
 
 
-print(exponentiation_binaire_rec(2, 4))
-print(exponentiation_binaire_rec(2, 5))
-
-print(exponentiation_binaire_rec(3, 3))
-print(exponentiation_binaire_rec(3, 4))
-
-print(exponentiation_binaire_rec(5, 3))
-print(exponentiation_binaire_rec(5, 4))
+assert exponentiation_binaire_rec(2, 4) == exponentiation_binaire_iter(2, 4)
+assert exponentiation_binaire_rec(2, 5) == exponentiation_binaire_iter(2, 5)
+assert exponentiation_binaire_rec(3, 3) == exponentiation_binaire_iter(3, 3)
+assert exponentiation_binaire_rec(3, 4) == exponentiation_binaire_iter(3, 4)
+assert exponentiation_binaire_rec(5, 3) == exponentiation_binaire_iter(5, 3)
+assert exponentiation_binaire_rec(5, 4) == exponentiation_binaire_iter(5, 4)
