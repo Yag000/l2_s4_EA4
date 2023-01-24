@@ -38,7 +38,9 @@ def exercice6():
     l = list(range(2, 37, 3))
     lg = l[: len(l) // 2]
     ld = l[len(l) // 2 :]
-
+    print()
+    print(l, lg, ld)
+    ld[0] += 2022
     print(l, lg, ld)
     f(lg)
     print(l, lg, ld)
