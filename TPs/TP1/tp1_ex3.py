@@ -35,7 +35,7 @@ def g(l):
 
 
 def exercice6():
-    l = list(range(2, 36, 3))
+    l = list(range(2, 37, 3))
     lg = l[: len(l) // 2]
     ld = l[len(l) // 2 :]
 
