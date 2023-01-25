@@ -60,10 +60,9 @@ def crible_eratosthene(n):
     res[0] = False
     res[1] = False
 
-    for i in range(2, n + 1):
+    for i in range(2, int(n**0.5) + 1):
         if res[i]:
-            for j in range(i + i, n + 1, i):
-                res[j] = False
+            res[2 * i :: i] = [False] * ((n - 2 * i) // i + 1)
 
     return res
 
