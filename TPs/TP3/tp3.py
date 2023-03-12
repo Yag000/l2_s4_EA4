@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
 import sys
 
@@ -140,6 +141,12 @@ def triInsertionEchange(T):
 
 
 def shiftByOne(T, new_index, old_index):
+    """
+    Déplace un element d'un tableau vers la gauche de
+    la liste dans la position old_index vers la position
+    new_index en faisant des échanges successifs.
+    """
+
     tmp = T[old_index]
     for i in range(old_index, new_index, -1):
         T[i] = T[i - 1]
@@ -158,6 +165,9 @@ def triInsertionRotation(T):
 
 
 def findCorrectIndexDichotomy(T, value, start, end):
+    """
+    Recherche dichotomique de la position d'un element dans un tableau trié.
+    """
     if start == end:
         return start
     middle = (start + end) // 2
@@ -182,12 +192,23 @@ def triInsertionRapide(T):
 
 
 def fusion(T1, T2):
+    """
+    Fusionne deux tableaux en un seul tableau de manière itérative.
+    """
     n1 = len(T1)
     n2 = len(T2)
     T12 = [0] * (n1 + n2)
+
+    # index des tableaux T1 et T2
     i1 = 0
     i2 = 0
+    # index du tableau final
     i = 0
+
+    # On fusionne les deux tableaux en un seul.
+    # On parcourt les deux tableaux en même temps
+    # et on ajoute l'élément le plus petit dans
+    # le tableau final
     while i1 < n1 and i2 < n2:
         if T1[i1] < T2[i2]:
             T12[i] = T1[i1]
@@ -196,6 +217,8 @@ def fusion(T1, T2):
             T12[i] = T2[i2]
             i2 += 1
         i += 1
+
+    # On ajoute les éléments restants dans le tableau final
     while i1 < n1:
         T12[i] = T1[i1]
         i1 += 1
@@ -204,6 +227,7 @@ def fusion(T1, T2):
         T12[i] = T2[i2]
         i2 += 1
         i += 1
+
     return T12
 
 
@@ -259,11 +283,9 @@ def triInsertionPartiel(T, gap, debut):
 
 
 def triShell(T):
-
     for gap in [57, 23, 10, 4, 1]:
         for i in range(gap):
             triInsertionPartiel(T, gap, i)
-
     return T
 
 
@@ -411,21 +433,6 @@ if __name__ == "__main__":
     sys.setrecursionlimit(4000)
 
     # Question 1.6
-
-    print("triSelection")
-    testeQueLaFonctionTrie(triSelection)
-    print("triInsertionEchange")
-    testeQueLaFonctionTrie(triInsertionEchange)
-    print("triInsertionRotation")
-    testeQueLaFonctionTrie(triInsertionRotation)
-    print("triInsertionRapide")
-    testeQueLaFonctionTrie(triInsertionRapide)
-    print("triFusion")
-    testeQueLaFonctionTrie(triFusion)
-    print("triBulles")
-    testeQueLaFonctionTrie(triBulles)
-    print("triShell")
-    testeQueLaFonctionTrie(triShell)
 
     print("Exercice 1")
     algos = [triSelection]
