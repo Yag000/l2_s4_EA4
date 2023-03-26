@@ -248,8 +248,19 @@ def tri_drapeau_en_place(T):
 
 
 def partition_drapeau(T, pivot):
-    # A compléter
-    return T, [], []
+    inferieur = []
+    egale = []
+    superieur = []
+
+    for i in T:
+        if i < pivot:
+            inferieur.append(i)
+        elif i == pivot:
+            egale.append(i)
+        else:
+            superieur.append(i)
+
+    return inferieur, egale, superieur
 
 
 ############################################################
@@ -261,8 +272,10 @@ def partition_drapeau(T, pivot):
 
 
 def tri_rapide_drapeau(T):
-    # A compléter
-    return T
+    if len(T) < 2:
+        return T
+    gauche, pivot, droite = partition_drapeau(T, T[0])
+    return tri_rapide(gauche) + pivot + tri_rapide(droite)
 
 
 ############################################################
@@ -284,9 +297,21 @@ def tri_rapide_drapeau(T):
 #
 
 
-def partition_drapeau_en_place(T, pivot):
-    # A compléter
-    return 0, 0
+def partition_drapeau_en_place(T, pivot, debut, fin):
+    inferieur = debut
+    egale = debut
+    superieur = fin - 1
+    while egale <= superieur:
+        if T[egale] < pivot:
+            T[inferieur], T[egale] = T[egale], T[inferieur]
+            inferieur += 1
+            egale += 1
+        elif T[egale] == pivot:
+            egale += 1
+        else:
+            T[egale], T[superieur] = T[superieur], T[egale]
+            superieur -= 1
+    return inferieur, egale
 
 
 ############################################################
@@ -297,7 +322,15 @@ def partition_drapeau_en_place(T, pivot):
 
 
 def tri_rapide_drapeau_en_place(T, debut=0, fin=None):
-    # A compléter
+    if fin is None:
+        fin = len(T)
+    if fin - debut < 2:
+        return T
+    pivot = T[debut]
+    egale_index, superieur_index = partition_drapeau_en_place(T, pivot, debut, fin)
+    tri_rapide_drapeau_en_place(T, debut, egale_index)
+    tri_rapide_drapeau_en_place(T, superieur_index, fin)
+
     return T
 
 
@@ -549,34 +582,41 @@ if __name__ == "__main__":
         4523,
     ]
     print(T)
-    print(tri_rapide(T))
-    print(tri_rapide_en_place(T))
-    print(tri_rapide_aleatoire(T))
-    print(tri_rapide_en_place_aleatoire(T))
-    # trisRapides = [
-    #     tri_insertion,
-    #     tri_fusion,
-    #     tri_rapide,
-    #     tri_rapide_en_place,
-    #     tri_rapide_aleatoire,
-    #     tri_rapide_en_place_aleatoire,
-    # ]
-    # trisHybrides = [tri_rapide_ameliore, tri_sedgewick]
-    # trisDrapeaux = [tri_drapeau, tri_drapeau_en_place]
-    # trisRapidesDrapeaux = [tri_fusion, tri_rapide_drapeau, tri_rapide_drapeau_en_place]
+    print("Tri tri_rapide :", tri_rapide(T.copy()))
+    print("Tri tri_rapide_en_place :", tri_rapide_en_place(T.copy()))
+    print("Tri tri_rapide_aleatoire :", tri_rapide_aleatoire(T.copy()))
+    print(
+        "Tri tri_rapide_en_place_aleatoire :", tri_rapide_en_place_aleatoire(T.copy())
+    )
+    print("Tri tri_rapide_ameliore :", tri_rapide_ameliore(T.copy()))
+    print("Tri tri_sedgewick :", tri_sedgewick(T.copy()))
+    print("Tri tri_rapide_drapeau :", tri_rapide_drapeau(T.copy()))
+    print("Tri tri_rapide_drapeau_en_place :", tri_rapide_drapeau_en_place(T.copy()))
+
+    trisRapides = [
+        tri_insertion,
+        tri_fusion,
+        tri_rapide,
+        tri_rapide_en_place,
+        tri_rapide_aleatoire,
+        tri_rapide_en_place_aleatoire,
+    ]
+    trisHybrides = [tri_rapide_ameliore, tri_sedgewick]
+    trisDrapeaux = [tri_drapeau, tri_drapeau_en_place]
+    trisRapidesDrapeaux = [tri_fusion, tri_rapide_drapeau, tri_rapide_drapeau_en_place]
 
     # exercice 1
 
     # print("Exercice 1")
-    # algos = trisRapides
+    algos = trisRapides
     # compare_algos(algos)
 
     # exercice 2
 
     # print("Exercice 2")
-    # algos = trisHybrides
+    algos = trisHybrides
     # compare_algos(algos)
-    # algos = trisRapides + trisHybrides
+    algos = trisRapides + trisHybrides
     # compare_algos(algos)
 
     # exercice 3
@@ -586,13 +626,13 @@ if __name__ == "__main__":
     print(tri_drapeau(T))
     print(tri_drapeau_en_place(T))
 
-    # print("Exercice 3")
-    # # comparaison des tris drapeaux
-    # print("Comparaisons sur tableaux très répétés")
-    # algos = trisDrapeaux
-    # compare_tableaux_repetes(algos, maxVal=3)
+    print("Exercice 3")
+    # comparaison des tris drapeaux
+    print("Comparaisons sur tableaux très répétés")
+    algos = trisDrapeaux
+    compare_tableaux_repetes(algos, maxVal=3)
 
-    # # comparaison des tris rapide drapeaux
-    # print("Comparaisons sur tableaux très répétés")
-    # algos = [tri_rapide, tri_rapide_en_place] + trisRapidesDrapeaux
-    # compare_tableaux_repetes(algos, taille=1000, pas=100, ech=5, maxVal=5)
+    # comparaison des tris rapide drapeaux
+    print("Comparaisons sur tableaux très répétés")
+    algos = [tri_rapide, tri_rapide_en_place] + trisRapidesDrapeaux
+    compare_tableaux_repetes(algos, taille=1000, pas=100, ech=5, maxVal=5)
