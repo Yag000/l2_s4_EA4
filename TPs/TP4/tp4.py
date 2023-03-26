@@ -107,8 +107,8 @@ def tri_rapide_en_place_aleatoire(T, deb=0, fin=None):
 ############################################################
 """ Exercice 1.3: Interprétation des courbes
 
-# A COMPLETER
-
+    On que le tri rapide est main a main avec le tri fusion. La version en place est plus rapide que la version avec mémoire auxiliaire.
+    L'ajout d'un pivot aléatoire a un impact sur la vitesse du tri rapide dans le cas ou le tableau est presque trié.
 """
 
 ############################################################
@@ -163,7 +163,7 @@ def tri_rapide_partiel(T, deb=0, fin=None):
     if fin is None:
         fin = len(T)
     if fin - deb < 15:
-        return
+        return T
 
     if deb < fin:
         pivot = partition_en_place(T, deb, fin)
@@ -281,7 +281,8 @@ def tri_rapide_drapeau(T):
 ############################################################
 """ Exercice 3.3: Interprétation des courbes
 
-# A COMPLETER
+    On observe que sur les tableaux avec beaucoup de doublons, le tri rapide drapeau est plus rapide que le tri rapide classique.
+    En particulier la version en place est plus rapide que la version non en place du tr rapide.
 
 """
 
@@ -559,39 +560,24 @@ def compare_tableaux_repetes(algos, taille=20000, pas=1000, ech=15, maxVal=3):
 
 if __name__ == "__main__":
 
-    T = [
-        324,
-        654,
-        23,
-        412,
-        31243,
-        345456,
-        23313123,
-        5445645,
-        34,
-        112,
-        34,
-        5,
-        5,
-        6,
-        6,
-        6,
-        7,
-        7,
-        5,
-        4523,
-    ]
-    print(T)
-    print("Tri tri_rapide :", tri_rapide(T.copy()))
-    print("Tri tri_rapide_en_place :", tri_rapide_en_place(T.copy()))
-    print("Tri tri_rapide_aleatoire :", tri_rapide_aleatoire(T.copy()))
-    print(
-        "Tri tri_rapide_en_place_aleatoire :", tri_rapide_en_place_aleatoire(T.copy())
-    )
-    print("Tri tri_rapide_ameliore :", tri_rapide_ameliore(T.copy()))
-    print("Tri tri_sedgewick :", tri_sedgewick(T.copy()))
-    print("Tri tri_rapide_drapeau :", tri_rapide_drapeau(T.copy()))
-    print("Tri tri_rapide_drapeau_en_place :", tri_rapide_drapeau_en_place(T.copy()))
+    # T = [324,654,5,23,412,31243,345456,23313123,5445645,34,112,34,5,5,6,6,6,7,7,5,4523]
+    # Tests pour voir si les implementations sont correctes (ça ne traite pas tous les cas mais ça donne uu idée)
+    # print(T)
+    # print("Tri tri_rapide :", tri_rapide(T.copy()))
+    # print("Tri tri_rapide_en_place :", tri_rapide_en_place(T.copy()))
+    # print("Tri tri_rapide_aleatoire :", tri_rapide_aleatoire(T.copy()))
+    # print(
+    #     "Tri tri_rapide_en_place_aleatoire :", tri_rapide_en_place_aleatoire(T.copy())
+    # )
+    # print("Tri tri_rapide_ameliore :", tri_rapide_ameliore(T.copy()))
+    # print("Tri tri_sedgewick :", tri_sedgewick(T.copy()))
+    # print("Tri tri_rapide_drapeau :", tri_rapide_drapeau(T.copy()))
+    # print("Tri tri_rapide_drapeau_en_place :", tri_rapide_drapeau_en_place(T.copy()))
+
+    # T = [BLANC, BLEU, ROUGE, BLEU, ROUGE, ROUGE, BLANC, ROUGE, BLEU, BLEU, ROUGE, BLANC]
+    # print(T)
+    # print(tri_drapeau(T))
+    # print(tri_drapeau_en_place(T))
 
     trisRapides = [
         tri_insertion,
@@ -607,24 +593,19 @@ if __name__ == "__main__":
 
     # exercice 1
 
-    # print("Exercice 1")
+    print("Exercice 1")
     algos = trisRapides
-    # compare_algos(algos)
+    compare_algos(algos)
 
     # exercice 2
 
-    # print("Exercice 2")
+    print("Exercice 2")
     algos = trisHybrides
-    # compare_algos(algos)
+    compare_algos(algos)
     algos = trisRapides + trisHybrides
-    # compare_algos(algos)
+    compare_algos(algos)
 
     # exercice 3
-
-    T = [BLANC, BLEU, ROUGE, BLEU, ROUGE, ROUGE, BLANC, ROUGE, BLEU, BLEU, ROUGE, BLANC]
-    print(T)
-    print(tri_drapeau(T))
-    print(tri_drapeau_en_place(T))
 
     print("Exercice 3")
     # comparaison des tris drapeaux
