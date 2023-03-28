@@ -118,11 +118,13 @@ def tri_rapide_en_place_aleatoire(T, deb=0, fin=None):
 #
 
 
-def tri_insertion(T):
+def tri_insertion(T, deb=0, fin=None):
+    if fin == None:
+        fin = len(T)
     if T == None:
         return T
-    for i in range(1, len(T)):
-        for j in range(i, 0, -1):
+    for i in range(deb, fin):
+        for j in range(i, deb, -1):
             if T[j - 1] > T[j]:
                 T[j - 1], T[j] = T[j], T[j - 1]
             else:
@@ -142,7 +144,7 @@ def tri_rapide_ameliore(T, deb=0, fin=None):
     if fin is None:
         fin = len(T)
     if fin - deb < 15:
-        return tri_insertion(T)
+        return tri_insertion(T, deb, fin)
     if deb < fin:
         pivot = partition_en_place(T, deb, fin)
         tri_rapide_ameliore(T, deb, pivot)
@@ -186,7 +188,7 @@ def tri_sedgewick(T):
 ############################################################
 """ Exercice 2.5: Interprétation des courbes
 
-# A COMPLETER
+    On voit que le tri rapide amélioré est tres similaire au tri sedgewick. Ils sont tous les deux un peu plus rapide que le tri rapide usuel.
 
 """
 
